@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "express": "^4.19.2",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
@@ -21,5 +22,17 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "description": "leaderboard app to track competitions",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexGuyNichols/crossfit-comp-tracker.git"
+  },
+  "author": "Alex Nichols",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexGuyNichols/crossfit-comp-tracker/issues"
+  },
+  "homepage": "https://github.com/AlexGuyNichols/crossfit-comp-tracker#readme"
 }
