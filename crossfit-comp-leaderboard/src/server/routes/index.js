@@ -20,4 +20,44 @@ router.post('/create-user', async (req, res) => {
   }
 });
 
+// Route to get a user by username
+router.get('/get-user/:username', async (req, res) => {
+    const { username } = req.params;
+  
+    try {
+      const user = await User.findOne({ username });
+      if (user) {
+        res.status(200).json({ username: user.username, password: user.password });
+      } else {
+        res.status(404).send('User not found');
+      }
+    } catch (err) {
+      res.status(500).send('Error retrieving user: ' + err.message);
+    }
+});
+  
+// Route to get all users
+router.get('/get-users', async (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).send('Error retrieving users: ' + err.message);
+    }
+});
+
+// Route to update a user by username
+
+// Route to delete a user by username
+
+// Route to delete all users
+router.delete('/delete-users', async (req, res) => {
+    try {
+      await User.deleteMany();
+      res.status(200).send('All users deleted');
+    } catch (err) {
+      res.status(500).send('Error deleting users: ' + err.message);
+    }
+});
+
 module.exports = router;
