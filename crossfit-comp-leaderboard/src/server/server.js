@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const routes = require('./routes');
-const auth = require('./routes/auth'); // Import auth routes
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -30,7 +30,7 @@ mongoose.connection.on('error', (err) => {
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-require('./config/passport')(passport); // Adjust the path as needed
+require('./config/passport')(passport);
 
 // Use Routes
 app.use('/', routes);
