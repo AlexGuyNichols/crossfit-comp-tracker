@@ -10,6 +10,16 @@ const keys = require('../config/keys'); // Adjust the path as needed
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
+  console.log('Request Body:', req.body); // Log the request body to debug
+
+  const { username, password } = req.body;
+  console.log('Username:', username); // Log username to debug
+  console.log('Password:', password); // Log password to debug
+
+  if (!username || !password) {
+    return res.status(400).send('Username and password are required');
+  }
+
   User.findOne({ username: req.body.username }).then(user => {
     if (user) {
       return res.status(400).json({ username: 'Username already exists' });
@@ -21,8 +31,13 @@ router.post('/register', (req, res) => {
 
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+          return res.status(500).json({ error: 'Error generating salt' });
+        }
         bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
+          if (err) {
+            return res.status(500).json({ error: 'Error hashing password' });
+          }
           newUser.password = hash;
           newUser.save()
             .then(user => res.json(user))

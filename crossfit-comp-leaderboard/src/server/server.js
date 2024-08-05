@@ -11,13 +11,12 @@ const auth = require('./routes/auth'); // Import auth routes
 const app = express();
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
 // Database Connection
 mongoose.connect('mongodb://localhost:27017/database-cf', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
 });
 
 mongoose.connection.on('connected', () => {
